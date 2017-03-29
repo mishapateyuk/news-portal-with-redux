@@ -1,4 +1,8 @@
-const authReducer = (state = {user: localStorage.getItem('username'), message: '',}, action) => {
+const user = localStorage.getItem('username') ||
+  localStorage.setItem('username', 'Guest') ||
+  localStorage.getItem('username');
+
+const authReducer = (state = {user, message: '',}, action) => {
   switch(action.type) {
     case 'LOG_IN' :
       return Object.assign({}, state, {user: action.user, message: '',});
