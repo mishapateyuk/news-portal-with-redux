@@ -13,7 +13,7 @@ const mapStateToProps =
     message: state.userData.message,
   });
 
-class Auth extends React.Component {
+class Auth extends React.PureComponent {
 
   clickHandler() {
     const login = this.loginInput && this.loginInput.value;

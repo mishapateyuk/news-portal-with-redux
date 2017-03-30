@@ -7,7 +7,7 @@ const mapStateToProps =
     user: state.userData.user,
   });
 
-class NewsItem extends React.Component {
+class NewsItem extends React.PureComponent {
 
   showAdvancedProperties() {
     if (this.props.user !== 'Guest') {

@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import NewsItem from '../components/NewsItem.react';
 import {showModal} from '../actions/modalActionCreators';
 import {showNews} from '../actions/newsActionCtreators';
+import {getFilteredNews} from '../services/filterNews';
 
 const mapStateToProps = ({news}) => ({
   all: news.all,
-  sorted: news.sorted,
+  filtersSettings: news.filtersSettings,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -15,11 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   showNews: () => dispatch(showNews()),
 });
 
- class NewsList extends React.Component {
-
+class NewsList extends React.PureComponent {
   componentDidMount() {
     if (this.props.all === null) {
-      console.log('show me news');
       this.props.showNews();
     } else {
       return;
@@ -34,8 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
         </div>
       );
     } else {
-      const {all, sorted} = this.props;
-      const newsToRender = sorted === null ? all : sorted;
+      const {all, filtersSettings} = this.props;
+      const newsToRender = filtersSettings === null ? all : getFilteredNews(filtersSettings, all);
       return (
         <div className="news-wrapper clearfix">
           <div className="buttons-wrapper">
@@ -46,7 +45,7 @@ const mapDispatchToProps = (dispatch) => ({
           {newsToRender.map((news, index) => <NewsItem newsData={news} key={index} />)}
         </div>
       );
-    }
+    };
   };
 };
 

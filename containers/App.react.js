@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
   user: state.userData.user,
 });
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor() {
     super();
     this.requireAuth = this.requireAuth.bind(this);

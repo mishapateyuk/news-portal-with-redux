@@ -7,7 +7,7 @@ const mapDispatchToProps = (dispatch) => ({
   removeNews: (id) => dispatch(removeNews(id)),
 });
 
-class RemoveNews extends React.Component {
+class RemoveNews extends React.PureComponent {
 
   buttonHandler() {
     const id = this.props.params.id;

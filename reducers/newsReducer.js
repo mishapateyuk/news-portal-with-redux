@@ -1,11 +1,11 @@
-const newsReducer = (state = {all: null, sorted: null,}, action) => {
+const newsReducer = (state = {all: null, filtersSettings: null,}, action) => {
   switch (action.type) {
     case 'NEWS_ARE_CHANGED' :
-      return {all: null, sorted: null,};
+      return Object.assign({}, state, {all: null});
     case 'SHOW_NEWS' :
-      return {all: action.news, sorted: null,};
-    case 'SORT_NEWS' :
-      return Object.assign({}, state, {sorted: action.sortedNews,});
+      return Object.assign({}, state, {all: action.news});
+    case 'APPLY_FILTERS' :
+      return Object.assign({}, state, {filtersSettings: action.filtersSettings,});
     default :
       return state;
   };

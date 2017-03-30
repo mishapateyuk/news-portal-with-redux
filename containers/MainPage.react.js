@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
   news: state.news.all,
 });
 
-class MainPage extends React.Component {
+class MainPage extends React.PureComponent {
 
   showButton() {
     if (this.props.user !== 'Guest') {

@@ -5,7 +5,7 @@ import FromToDatepicker from '../components/FromToDatepicker.react';
 import Select from '../components/Select.react';
 import {connect} from 'react-redux';
 import {hideModal} from '../actions/modalActionCreators.js';
-import {sortNews} from '../actions/newsActionCtreators';
+import {filterNews} from '../actions/newsActionCtreators';
 
 const mapStateToProps = ({news}) => ({
   news: news.all,
@@ -13,12 +13,12 @@ const mapStateToProps = ({news}) => ({
 
 const mapActionsToProps = (dispatch) => ({
   hideModal: () => dispatch(hideModal()),
-  showSortedNews: (author, date, tags, allNews) => dispatch(sortNews(author, date, tags, allNews)),
+  applyFilter: (author, date, tags) => dispatch(filterNews(author, date, tags)),
 });
 
-class Filters extends React.Component {
-  constructor() {
-    super();
+class Filters extends React.PureComponent {
+  constructor(props) {
+    super(props);
     this.state = {
       author: null,
       tags: [],
@@ -98,7 +98,7 @@ class Filters extends React.Component {
         <button
         onClick={
             () => {
-              this.props.showSortedNews(author, tags, date, this.props.news);
+              this.props.applyFilter(author, tags, date);
               this.props.hideModal();
             }
           }

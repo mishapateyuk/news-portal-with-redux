@@ -12,7 +12,7 @@ function disabledDate(value) {
   return value > new Date() ? true : false;
 };
 
-export default class FromToDatepicker extends React.Component {
+export default class FromToDatepicker extends React.PureComponent {
   constructor(props) {
     super(props);
     this.fromHandler = this.props.fromHandler;

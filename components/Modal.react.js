@@ -6,7 +6,7 @@ const mapActionsToProps = (dispatch) => ({
   hideModal: () => dispatch(hideModal()),
 });
 
-class Modal extends React.Component {
+class Modal extends React.PureComponent {
 
   render() {
     return (

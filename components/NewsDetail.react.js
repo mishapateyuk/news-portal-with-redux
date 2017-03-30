@@ -11,11 +11,10 @@ const mapDispatchToProps = (dispatch) => ({
   showNews: () => dispatch(showNews()),
 });
 
-class NewsDetails extends React.Component {
+class NewsDetails extends React.PureComponent {
 
   componentDidMount() {
     if (this.props.news === null) {
-      console.log('show me news');
       this.props.showNews();
     } else {
       return;

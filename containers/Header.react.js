@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => ({
   logOut: () => dispatch(logOut()),
 });
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
 
   signOutButton() {
     if (this.props.user !== 'Guest') {

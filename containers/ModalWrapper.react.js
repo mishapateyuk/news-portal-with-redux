@@ -8,7 +8,7 @@ const mapStateToProps = ({modal}) => ({
   modal,
 });
 
-class ModalWrapper extends React.Component {
+class ModalWrapper extends React.PureComponent {
 
   modalChildren() {
     switch (this.props.modal.modalType) {

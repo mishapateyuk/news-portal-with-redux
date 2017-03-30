@@ -4,7 +4,7 @@ import { getTags } from '../models/tagsModel.js';
 import { newId } from '../models/articleModel.js';
 import { withRouter } from 'react-router';
 
-class NewsForm extends React.Component {
+class NewsForm extends React.PureComponent {
 
   constructor(props) {
     super(props);

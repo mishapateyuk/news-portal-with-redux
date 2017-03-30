@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
   addNews: (newsInfo) => dispatch(addNews(newsInfo)),
 });
 
-class AddNews extends React.Component {
+class AddNews extends React.PureComponent {
   constructor() {
     super();
     this.currentDate = (new Date()).toISOString().slice(0, -14).split('T').join(' ');

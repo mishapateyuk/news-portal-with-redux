@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class UserName extends React.Component {
+class UserName extends React.PureComponent {
   render() {
     return (
       <span className="user-name">

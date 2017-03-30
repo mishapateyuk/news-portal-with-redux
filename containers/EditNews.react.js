@@ -14,7 +14,7 @@ const mapStateToProps = ({news}) => ({
   news: news.all,
 });
 
-class EditNews extends React.Component {
+class EditNews extends React.PureComponent {
   constructor() {
     super();
     this.currentDate = (new Date()).toISOString().slice(0, -14).split('T').join(' ');
@@ -22,7 +22,6 @@ class EditNews extends React.Component {
 
   componentDidMount() {
     if (this.props.news === null) {
-      console.log('show me news');
       this.props.showNews();
     } else {
       return;
