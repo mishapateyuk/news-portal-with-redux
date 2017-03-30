@@ -4,10 +4,6 @@ import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 
-function getFormat(time) {
-  return time ? format : 'YYYY-MM-DD';
-};
-
 function disabledDate(value) {
   return value > new Date() ? true : false;
 };
@@ -35,7 +31,7 @@ export default class FromToDatepicker extends React.PureComponent {
                       style={{ width: 250 }}
                       readOnly
                       style={{ marginRight: 20, marginLeft: 5 }}
-                      value={value && value.format(getFormat(this.props.showTime)) || ''}
+                      value={this.props.fromTime && this.props.fromTime.format('YYYY-MM-DD') || ''}
                     />
                     </span>
               );
@@ -52,11 +48,11 @@ export default class FromToDatepicker extends React.PureComponent {
               return (
                 <span>
                     <input
-                      placeholder="From"
+                      placeholder="To"
                       style={{ width: 250 }}
                       readOnly
                       style={{ marginLeft: 5 }}
-                      value={value && value.format(getFormat(this.props.showTime)) || ''}
+                      value={this.props.toTime && this.props.toTime.format('YYYY-MM-DD') || ''}
                     />
                     </span>
               );

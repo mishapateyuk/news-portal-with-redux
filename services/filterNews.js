@@ -7,8 +7,8 @@ const filterByAuthor = (article, author) => {
 
 const filterByDate = (article, date) => {
   const articleDate = (new Date(article.publishDate)).valueOf();
-  const dateFrom = date.from;
-  const dateTo = date.to ? date.to : Infinity;
+  const dateFrom = !!date.from ? new Date(date.from._d.toLocaleDateString()).valueOf() : 0;
+  const dateTo = !!date.to ? new Date(date.to._d.toLocaleDateString()).valueOf() + 3 * 3600000: Infinity;
   return articleDate >= dateFrom && articleDate <= dateTo;
 };
 

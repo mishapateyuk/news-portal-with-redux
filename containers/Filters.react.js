@@ -9,6 +9,7 @@ import {filterNews} from '../actions/newsActionCtreators';
 
 const mapStateToProps = ({news}) => ({
   news: news.all,
+  filtersSettings: news.filtersSettings,
 });
 
 const mapActionsToProps = (dispatch) => ({
@@ -19,11 +20,12 @@ const mapActionsToProps = (dispatch) => ({
 class Filters extends React.PureComponent {
   constructor(props) {
     super(props);
+    const fS = props.filtersSettings;
     this.state = {
-      author: null,
-      tags: [],
-      fromDate: null,
-      toDate: Infinity,
+      author: fS === null ? null : fS.author,
+      tags: fS === null ? [] : fS.tags.map((tag) => ({value: tag, label: tag,})),
+      fromDate: fS === null ? null : fS.date.from,
+      toDate: fS === null ? null : fS.date.to,
     };
     this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeTags = this.onChangeTags.bind(this);
@@ -44,16 +46,14 @@ class Filters extends React.PureComponent {
   };
 
   onChangeDateFrom(moment) {
-    const fromDate = moment ? new Date(moment._d.toLocaleDateString()).valueOf() : 0;
     this.setState({
-      fromDate: fromDate,
+      fromDate: moment,
     });
   };
 
   onChangeDateTo(moment) {
-    const toDate = moment ? new Date(moment._d.toLocaleDateString()).valueOf() + 3 * 3600000: Infinity;
     this.setState({
-      toDate: toDate,
+      toDate: moment,
     });
   };
 
@@ -65,10 +65,10 @@ class Filters extends React.PureComponent {
       return {value: tag, label:tag};
     });
     const author = this.state.author;
-    const tags = this.state.tags && this.state.tags.map((tag)=> tag.value);
+    const tags = this.state.tags.map((tag)=> tag.value);
     const date = {
-      from: this.state.fromDate || null,
-      to: this.state.toDate || Infinity,
+      from: this.state.fromDate,
+      to: this.state.toDate,
     };
     return (
       <div>
@@ -85,6 +85,8 @@ class Filters extends React.PureComponent {
           <FromToDatepicker
             onChangeDateTo={this.onChangeDateTo}
             onChangeDateFrom={this.onChangeDateFrom}
+            fromTime={this.state.fromDate}
+            toTime={this.state.toDate}
           />
         </div>
         Tag:
