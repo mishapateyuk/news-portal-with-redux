@@ -1,17 +1,17 @@
 import {addArticle, getArticles, deleteArticle, editArticle} from '../models/articleModel';
 
-const addNews = (dataInfo) => 
+const addNews = (dataInfo) =>
   (dispatch) => {
     addArticle(dataInfo);
     return dispatch({type: 'NEWS_ARE_CHANGED'});
 };
 
-const showNews = () => (dispatch) =>  {
+const showNews = () => (dispatch) => {
   return getArticles()
     .then((response) => dispatch({type: 'SHOW_NEWS', news: response}));
 };
 
-const editNews = (dataInfo) => 
+const editNews = (dataInfo) =>
   (dispatch) => {
     editArticle(dataInfo);
     return dispatch({type: 'NEWS_ARE_CHANGED'});

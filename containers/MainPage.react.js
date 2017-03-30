@@ -8,10 +8,7 @@ import {showNews} from '../actions/newsActionCtreators';
 
 const mapStateToProps = (state) => ({
   user: state.userData.user,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  showNews: () => dispatch(showNews()),
+  news: state.news.all,
 });
 
 class MainPage extends React.Component {
@@ -25,7 +22,6 @@ class MainPage extends React.Component {
   };
 
   render() {
-    this.props.showNews();
     return (
       <div>
         <ModalWrapper />
@@ -43,4 +39,4 @@ class MainPage extends React.Component {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, null)(MainPage);

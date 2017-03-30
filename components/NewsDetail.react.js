@@ -1,12 +1,27 @@
 import React from 'react';
 import Loading from '../components/Loading.react';
 import {connect} from 'react-redux';
+import {showNews} from '../actions/newsActionCtreators';
 
 const mapStateToProps = ({news}) => ({
   news: news.all,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  showNews: () => dispatch(showNews()),
+});
+
 class NewsDetails extends React.Component {
+
+  componentDidMount() {
+    if (this.props.news === null) {
+      console.log('show me news');
+      this.props.showNews();
+    } else {
+      return;
+    };
+  };
+
   render() {
     const id = this.props.params.id;
     const {news} = this.props;
@@ -41,4 +56,4 @@ class NewsDetails extends React.Component {
   };
 };
 
-export default connect(mapStateToProps, null)(NewsDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsDetails);

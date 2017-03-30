@@ -3,6 +3,7 @@ import Loading from '../components/Loading.react';
 import {connect} from 'react-redux';
 import NewsItem from '../components/NewsItem.react';
 import {showModal} from '../actions/modalActionCreators';
+import {showNews} from '../actions/newsActionCtreators';
 
 const mapStateToProps = ({news}) => ({
   all: news.all,
@@ -11,9 +12,20 @@ const mapStateToProps = ({news}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   showModal: () => dispatch(showModal('FILTERS')),
+  showNews: () => dispatch(showNews()),
 });
 
  class NewsList extends React.Component {
+
+  componentDidMount() {
+    if (this.props.all === null) {
+      console.log('show me news');
+      this.props.showNews();
+    } else {
+      return;
+    };
+  };
+
   render() {
     if (this.props.all === null) {
       return (
