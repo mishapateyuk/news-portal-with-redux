@@ -5,10 +5,10 @@ const addNews = (dataInfo) =>
   (dispatch) => {
     dispatch({type: newsAreChangedType});
     addArticle(dataInfo)
-      .then(() => dispatch(showNews()));
+      .then(() => dispatch(loadNews()));
 };
 
-const showNews = () => (dispatch) => {
+const loadNews = () => (dispatch) => {
   return getArticles()
     .then(
         (response) => dispatch({
@@ -22,14 +22,14 @@ const editNews = (dataInfo) =>
   (dispatch) => {
     dispatch({type: newsAreChangedType});
     editArticle(dataInfo)
-      .then(() => dispatch(showNews()));
+      .then(() => dispatch(loadNews()));
 };
 
 const removeNews = (id) =>
   (dispatch) => {
     dispatch({type: newsAreChangedType});
     deleteArticle(id)
-      .then(() => dispatch(showNews()));
+      .then(() => dispatch(loadNews()));
 };
 
 const filterNews = (author, tags, date) => ({
@@ -41,4 +41,4 @@ const filterNews = (author, tags, date) => ({
   },
 });
 
-export {addNews, editNews, removeNews, showNews, filterNews};
+export {addNews, editNews, removeNews, loadNews, filterNews};

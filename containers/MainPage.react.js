@@ -4,10 +4,10 @@ import { Link } from 'react-router';
 import Header from './Header.react';
 import Footer from '../components/Footer.react';
 import ModalWrapper from './ModalWrapper.react';
-import {showNews} from '../actions/newsActionCtreators';
+import {loadNews} from '../actions/newsActionCtreators';
 
 const mapDispatchToProps = (dispatch) => ({
-  showNews: () => dispatch(showNews()),
+  loadNews: () => dispatch(loadNews()),
 });
 
 const mapStateToProps = (state) => ({
@@ -27,7 +27,7 @@ class MainPage extends React.PureComponent {
 
   componentDidMount() {
     if (this.props.news === null) {
-      this.props.showNews();
+      this.props.loadNews();
     } else {
       return;
     };
