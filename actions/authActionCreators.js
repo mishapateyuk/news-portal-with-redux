@@ -1,8 +1,10 @@
 import {checkAuthorizationData} from '../models/authorizationModel';
+import {logInType, logOutType, authErrorType} from '../constants/constants.js';
+
 const logIn = (user) => (dispatch) => {
   localStorage.setItem('username', user);
   dispatch({
-    type: 'LOG_IN',
+    type: logInType,
     user,
   });
 };
@@ -10,7 +12,7 @@ const logIn = (user) => (dispatch) => {
 const logOut = () => (dispatch) => {
   localStorage.setItem('username', 'Guest');
   dispatch({
-    type: 'LOG_OUT',
+    type: logOutType,
   });
 };
 
@@ -26,7 +28,7 @@ const auth = (login, pass) => (dispatch) => {
 };
 
 const authError = (message) => ({
-  type: 'AUTH_ERROR',
+  type: authErrorType,
   message,
 });
 

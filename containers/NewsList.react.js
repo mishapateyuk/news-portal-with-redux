@@ -3,7 +3,6 @@ import Loading from '../components/Loading.react';
 import {connect} from 'react-redux';
 import NewsItem from '../components/NewsItem.react';
 import {showModal} from '../actions/modalActionCreators';
-import {showNews} from '../actions/newsActionCtreators';
 import {getFilteredNews} from '../services/filterNews';
 
 const mapStateToProps = ({news}) => ({
@@ -12,20 +11,12 @@ const mapStateToProps = ({news}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   showModal: () => dispatch(showModal('FILTERS')),
-  showNews: () => dispatch(showNews()),
 });
 
 class NewsList extends React.PureComponent {
-  componentDidMount() {
-    if (this.props.news === null) {
-      this.props.showNews();
-    } else {
-      return;
-    };
-  };
 
   render() {
-    if (this.props.news === null) {
+    if (!this.props.news) {
       return (
         <div className="news-wrapper clearfix">
           <Loading />

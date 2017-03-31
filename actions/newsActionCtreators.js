@@ -1,30 +1,39 @@
 import {addArticle, getArticles, deleteArticle, editArticle} from '../models/articleModel';
+import {newsAreChangedType, loadNewsType, applyFiltersType} from '../constants/constants.js';
 
 const addNews = (dataInfo) =>
   (dispatch) => {
-    addArticle(dataInfo);
-    return dispatch({type: 'NEWS_ARE_CHANGED'});
+    dispatch({type: newsAreChangedType});
+    addArticle(dataInfo)
+      .then(() => dispatch(showNews()));
 };
 
 const showNews = () => (dispatch) => {
   return getArticles()
-    .then((response) => dispatch({type: 'SHOW_NEWS', news: response}));
+    .then(
+        (response) => dispatch({
+          type: loadNewsType,
+          news: response,
+        })
+      );
 };
 
 const editNews = (dataInfo) =>
   (dispatch) => {
-    editArticle(dataInfo);
-    return dispatch({type: 'NEWS_ARE_CHANGED'});
+    dispatch({type: newsAreChangedType});
+    editArticle(dataInfo)
+      .then(() => dispatch(showNews()));
 };
 
 const removeNews = (id) =>
   (dispatch) => {
-    deleteArticle(id);
-    return dispatch({type: 'NEWS_ARE_CHANGED'});
+    dispatch({type: newsAreChangedType});
+    deleteArticle(id)
+      .then(() => dispatch(showNews()));
 };
 
 const filterNews = (author, tags, date) => ({
-  type: 'APPLY_FILTERS',
+  type: applyFiltersType,
   filtersSettings: {
     author,
     date,

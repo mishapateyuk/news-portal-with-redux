@@ -2,53 +2,59 @@ var articles = JSON.parse(localStorage.getItem('news')) || [];
 
 function getArticles() {
   return new Promise((resolve, reject) => {
-    setTimeout(()=> resolve(articles.reverse()), 1000);
+    setTimeout(()=> resolve(articles.reverse()), 200);
   });
 };
 
 function addArticle({id, title, author, tags, publishDate, shortDescription, fullDescription}) {
-  const article = {
-    id,
-    title,
-    author,
-    tags,
-    publishDate,
-    shortDescription,
-    fullDescription
-  };
-  articles.push(article);
-  localStorage.setItem(
-    'news',
-    JSON.stringify(articles)
-  );
-};
-
-function getArticleById(id) {
-  return new Promise(
-    (resolve, reject) => {
-      const article = articles.find((item) => item.id == id);
-      setTimeout(() => resolve(article) ,1000);
-    }
-  );
+  return new Promise((resolve, reject) => {
+    setTimeout(()=> {
+      const article = {
+        id,
+        title,
+        author,
+        tags,
+        publishDate,
+        shortDescription,
+        fullDescription,
+      };
+      articles.push(article);
+      localStorage.setItem(
+        'news',
+        JSON.stringify(articles)
+      );
+      resolve(articles.reverse());
+    }, 400);
+  });
 };
 
 function editArticle(dataInfo) {
-  let article = articles.find((item) => item.id == dataInfo.id);
-  article = Object.assign(article, dataInfo);
-  localStorage.setItem(
-    'news',
-    JSON.stringify(articles)
-  );
+  return new Promise((resolve, reject) => {
+    setTimeout(()=> {
+      let article = articles.find((item) => item.id == dataInfo.id);
+      article = Object.assign(article, dataInfo);
+      localStorage.setItem(
+        'news',
+        JSON.stringify(articles)
+      );
+      resolve(articles.reverse());
+    }, 400);
+  });
 };
 
 function deleteArticle(id) {
-  const article = articles.find((item) => item.id == id);
-  const index = articles.indexOf(article);
-  articles.splice(index, 1);
-  localStorage.setItem(
-    'news',
-    JSON.stringify(articles)
-  );
+  return new Promise((resolve, reject) => {
+    setTimeout(()=> {
+      const article = articles.find((item) => item.id == id);
+      const index = articles.indexOf(article);
+      articles.splice(index, 1);
+      localStorage.setItem(
+        'news',
+        JSON.stringify(articles)
+      );
+      resolve(articles.reverse());
+    }, 400);
+  });
 }
 
 const newId = (function getNewId() {
@@ -60,4 +66,4 @@ const newId = (function getNewId() {
   };
 })();
 
-export { getArticles, newId, getArticleById, addArticle, editArticle, deleteArticle };
+export { getArticles, newId, addArticle, editArticle, deleteArticle };

@@ -1,10 +1,12 @@
+import {showModalType, hideModalType} from '../constants/constants.js';
+
 const showModal = (modalType) => ({
-  type: 'SHOW_MODAL',
+  type: showModalType,
   modalType,
 });
 
 const hideModal = () => ({
-  type: 'HIDE_MODAL',
+  type: hideModalType,
   modalType: null,
 });
 

@@ -6,6 +6,10 @@ import Footer from '../components/Footer.react';
 import ModalWrapper from './ModalWrapper.react';
 import {showNews} from '../actions/newsActionCtreators';
 
+const mapDispatchToProps = (dispatch) => ({
+  showNews: () => dispatch(showNews()),
+});
+
 const mapStateToProps = (state) => ({
   user: state.userData.user,
   news: state.news.all,
@@ -18,6 +22,14 @@ class MainPage extends React.PureComponent {
       return <Link to="/add" className="button add-news">Add news</Link>;
     } else {
       return null;
+    };
+  };
+
+  componentDidMount() {
+    if (this.props.news === null) {
+      this.props.showNews();
+    } else {
+      return;
     };
   };
 
@@ -39,4 +51,4 @@ class MainPage extends React.PureComponent {
   };
 };
 
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
