@@ -21,7 +21,7 @@ const filterByTag = (article, tags) => {
 
 const getFilteredNews = (filtersSettings, allNews) => {
   const {author, tags, date} = filtersSettings;
-  return allNews.filter(
+  return !allNews ? null : allNews.filter(
     (article) => (
       filterByAuthor(article, author) &&
       filterByTag(article, tags) &&

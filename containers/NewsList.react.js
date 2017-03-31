@@ -7,8 +7,7 @@ import {showNews} from '../actions/newsActionCtreators';
 import {getFilteredNews} from '../services/filterNews';
 
 const mapStateToProps = ({news}) => ({
-  all: news.all,
-  filtersSettings: news.filtersSettings,
+  news: news.filtersSettings === null ? news.all : getFilteredNews(news.filtersSettings, news.all),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -18,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 class NewsList extends React.PureComponent {
   componentDidMount() {
-    if (this.props.all === null) {
+    if (this.props.news === null) {
       this.props.showNews();
     } else {
       return;
@@ -26,15 +25,13 @@ class NewsList extends React.PureComponent {
   };
 
   render() {
-    if (this.props.all === null) {
+    if (this.props.news === null) {
       return (
         <div className="news-wrapper clearfix">
           <Loading />
         </div>
       );
     } else {
-      const {all, filtersSettings} = this.props;
-      const newsToRender = filtersSettings === null ? all : getFilteredNews(filtersSettings, all);
       return (
         <div className="news-wrapper clearfix">
           <div className="buttons-wrapper">
@@ -42,7 +39,7 @@ class NewsList extends React.PureComponent {
               Filters
             </span>
           </div>
-          {newsToRender.map((news, index) => <NewsItem newsData={news} key={index} />)}
+          {this.props.news.map((news, index) => <NewsItem newsData={news} key={index} />)}
         </div>
       );
     };
